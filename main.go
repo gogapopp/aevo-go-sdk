@@ -13,6 +13,11 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(assets)
+	expiries, err := client.GetExpiries("ETH")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(expiries)
 	assetPrice, err := client.GetAssetPrice("ETH")
 	if err != nil {
 		fmt.Println(err)

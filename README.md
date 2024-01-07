@@ -6,13 +6,22 @@ The community version of Go Aevo sdk
 client := aevo.NewClient("https://api.aevo.xyz/")
 ```  
 ### Returns the list of active underlying assets.  
-```assets, err := client.GetAssets()  
+```
+assets, err := client.GetAssets()  
 if err != nil {  
 	return err  
 }
 ```  
+### Returns the expiry timestamps of derivatives of the given asset.  
+```  
+expiries, err := client.GetExpiries("ETH")  
+if err != nil {  
+	fmt.Println(err)  
+}  
+```  
 ### Returns the current index price of the given asset.  
-```assetPrice, err := client.GetAssetPrice("ETH")  
+```
+assetPrice, err := client.GetAssetPrice("ETH")  
 if err != nil {  
 	return err  
 }
