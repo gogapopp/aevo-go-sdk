@@ -3,11 +3,9 @@ The community version of Go Aevo sdk
 
 Examples  
 Client  
-```	client := aevo.NewClient("https://api.aevo.xyz/")
-```
+```client := aevo.NewClient("https://api.aevo.xyz/")```
 Returns the list of active underlying assets.  
-```
-assets, err := client.GetAssets()  
+```assets, err := client.GetAssets()  
 if err != nil {  
 	return err  
 }```  
