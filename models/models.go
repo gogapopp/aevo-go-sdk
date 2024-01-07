@@ -1,5 +1,9 @@
 package models
 
+import (
+	"github.com/ethereum/go-ethereum/common"
+)
+
 type (
 	AssetPrice struct {
 		Timestamp int64   `json:"timestamp,string"`
@@ -21,5 +25,26 @@ type (
 		FundingRate              string `json:"funding_rate"`
 		ContractType             string `json:"contract_type"`
 		ContractPriceCurrency    string `json:"contract_price_currency"`
+	}
+	Funding struct {
+		NextEpoch   string `json:"next_epoch"`
+		FundingRate string `json:"funding_rate"`
+	}
+	AevoTime struct {
+		Name      string `json:"name"`
+		Timestamp int    `json:"timestamp"`
+		Time      string `json:"time"`
+		Sequence  int    `json:"sequence"`
+		Block     int    `json:"block"`
+	}
+	AevoSignedOrder struct {
+		IsBuy      bool           `json:"is_buy"`
+		Instrument int            `json:"instrument"`
+		LimitPrice string         `json:"limit_price"`
+		Amount     string         `json:"amount"`
+		Timestamp  int64          `json:"timestamp,string"`
+		Salt       int64          `json:"salt,string"`
+		Maker      common.Address `json:"maker"`
+		Signature  string         `json:"signature"`
 	}
 )

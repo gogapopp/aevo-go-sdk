@@ -170,3 +170,73 @@ func (c *Client) GetCoingeckoStatistics() ([]models.CoingeckoStatistic, error) {
 	}
 	return coingeckoStat, nil
 }
+
+// GetFunding returns the current funding rate for the instrument
+func (c *Client) GetFunding(instrumentName string) (models.Funding, error) {
+	url := fmt.Sprintf("%sfunding?instrument_name=%s", c.baseUrl, instrumentName)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return models.Funding{}, err
+	}
+	req.Header.Add("accept", "application/json")
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return models.Funding{}, err
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return models.Funding{}, err
+	}
+	var funding models.Funding
+	err = json.Unmarshal(body, &funding)
+	if err != nil {
+		return models.Funding{}, err
+	}
+	return funding, nil
+}
+
+// GetFundingHistory returns the funding rate history for the instrument
+func (c *Client) GetFundingHistory(instrumentName string, startTime, endTime, limit int) ([]byte, error) {
+	url := fmt.Sprintf("%sfunding-history?instrument_name=%s&start_time=%d&end_time=%d&limit=%d", c.baseUrl, instrumentName, startTime, endTime, limit)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("accept", "application/json")
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
+}
+
+// GetTime returns the server time
+func (c *Client) GetTime() (models.AevoTime, error) {
+	url := fmt.Sprintf("%stime", c.baseUrl)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return models.AevoTime{}, err
+	}
+	req.Header.Add("accept", "application/json")
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return models.AevoTime{}, err
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return models.AevoTime{}, err
+	}
+	var aevoTime models.AevoTime
+	err = json.Unmarshal(body, &aevoTime)
+	if err != nil {
+		return models.AevoTime{}, err
+	}
+	return aevoTime, nil
+}

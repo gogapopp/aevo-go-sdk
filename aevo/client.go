@@ -1,8 +1,15 @@
 package aevo
 
+import (
+	"crypto/ecdsa"
+
+	"github.com/ethereum/go-ethereum/crypto"
+)
+
 type Client struct {
-	baseUrl   string
-	chainType string
+	baseUrl    string
+	chainType  string
+	signingKey *ecdsa.PrivateKey
 }
 
 const (
@@ -10,16 +17,19 @@ const (
 	mainnetUrl = "https://api.aevo.xyz/"
 )
 
-func NewClient(chainType string) *Client {
-	// testnet by default
+func NewClient(chainType, privateKeyString string) (*Client, error) {
 	baseUrl := testnetUrl
 	if chainType == "mainnet" {
 		baseUrl = mainnetUrl
-	} else if chainType == "testnet" {
-		baseUrl = testnetUrl
+	}
+	// парсим приватный ключ
+	privateKey, err := crypto.HexToECDSA(privateKeyString)
+	if err != nil {
+		return &Client{}, err
 	}
 	return &Client{
-		baseUrl:   baseUrl,
-		chainType: chainType,
-	}
+		baseUrl:    baseUrl,
+		chainType:  chainType,
+		signingKey: privateKey,
+	}, nil
 }
