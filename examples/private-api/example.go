@@ -1,0 +1,5 @@
+package privateapi
+
+func ExamplePrivateAPI() {
+
+}

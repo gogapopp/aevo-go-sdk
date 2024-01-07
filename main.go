@@ -7,20 +7,10 @@ import (
 )
 
 func main() {
-	client := aevo.NewClient("https://api.aevo.xyz/")
-	assets, err := client.GetAssets()
+	client := aevo.NewClient("mainnet")
+	coingeckoStat, err := client.GetCoingeckoStatistics()
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(assets)
-	expiries, err := client.GetExpiries("ETH")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(expiries)
-	assetPrice, err := client.GetAssetPrice("ETH")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(assetPrice)
+	fmt.Println(coingeckoStat)
 }
