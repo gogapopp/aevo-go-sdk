@@ -38,48 +38,6 @@ func getHeaders(path, method, body string) map[string]string {
 	return headers
 }
 
-// func (c *Client) CreateAndSignOrder(order models.AevoSignedOrder) ([]byte, error) {
-// 	// construct the order
-// 	order.Timestamp = time.Now().Unix()
-// 	order.Salt = int64(rand.Intn(900000) + 100000)
-// 	// sign the order
-// 	if c.signingKey == nil {
-// 		return nil, fmt.Errorf("signing key is not provided")
-// 	}
-// 	privateKey := c.signingKey
-// 	order.Maker = goc.PubkeyToAddress(privateKey.PublicKey)
-
-// 	// TODO: signature gen
-
-// 	// create the order
-// 	orderJSON, err := json.Marshal(order)
-// 	if err != nil {
-// 		fmt.Println("4")
-// 		return nil, err
-// 	}
-// 	fmt.Println(string(orderJSON))
-// 	url := fmt.Sprintf("%s/orders", c.baseUrl)
-// 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(orderJSON))
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	req.Header.Set("Content-Type", "application/json")
-// 	headers := getHeaders("/orders", "POST", string(orderJSON))
-// 	for k, v := range headers {
-// 		req.Header.Add(k, v)
-// 	}
-// 	res, err := http.DefaultClient.Do(req)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	defer res.Body.Close()
-// 	body, err := io.ReadAll(res.Body)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return body, nil
-// }
-
 func (c *Client) CreateAndSignOrder(order models.AevoSignedOrder) ([]byte, error) {
 	// construct the order
 	order.Timestamp = time.Now().Unix()
