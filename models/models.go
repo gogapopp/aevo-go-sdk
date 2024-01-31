@@ -40,8 +40,8 @@ type (
 	AevoSignedOrder struct {
 		IsBuy      bool           `json:"is_buy"`
 		Instrument int            `json:"instrument"`
-		LimitPrice string         `json:"limit_price"`
-		Amount     string         `json:"amount"`
+		LimitPrice int64          `json:"limit_price,string"`
+		Amount     int64          `json:"amount,string"`
 		Timestamp  int64          `json:"timestamp,string"`
 		Salt       int64          `json:"salt,string"`
 		Maker      common.Address `json:"maker"`

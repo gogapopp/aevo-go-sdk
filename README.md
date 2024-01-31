@@ -1,4 +1,9 @@
 # aevo-go-sdk  
+
+<p align="center">
+  <img src="https://i.postimg.cc/v8VH5QqP/Symbol-Filled-White.png" alt="Aevo Logo">
+</p>
+
 The community version of Go Aevo sdk  
 ## Examples  
 ### You need to add the env value from the .env file, for example  
